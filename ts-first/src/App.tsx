@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
 import Todos from './components/Todos';
-import './App.css';
+import TodoC from './models/todo';
+import NewTodo from './components/NewTodo';
+import classes from './App.module.css'
 
 function App() {
 
-  const [todos,setTodos] = useState(['Todo 1','Todo 2'])
-  const [todo,setTodo] = useState(['Todo 1','Todo 2'])
+  const [todos,setTodos] = useState<TodoC[]>([])
   
+  const addToDo = (todoText: string) => {
+    const newTodo = new TodoC(todoText)
+    setTodos(prev => [...prev, newTodo]) 
+  }
+
+  const removeToDo = (id: string) => {
+    const filteredTodos = todos.filter(todo => todo.id !== id)
+    if(!filteredTodos) return
+    setTodos(filteredTodos)
+  }
   
   return (
     <div className="App">
-      <Todos todos={todos}/>
-      {/* <input type="text" onChange={(e) => {setTodo(e.target.value)}} />
-      <button onClick={() => {setTodos(prev => [...prev, todo])}}>Add To Do</button> */}
+      <NewTodo onAddToDo={addToDo}/>
+      <Todos todos={todos} removeToDo={removeToDo}/>
     </div>
   );
 }
