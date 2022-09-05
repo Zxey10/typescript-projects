@@ -7,7 +7,7 @@ interface Props {
 
 type TodosContextObj = {items: TodoC[], addToDo: (todoText: string) => void, removeToDo: (id: string) => void}
 
-const TodosContext = React.createContext<TodosContextObj>({
+export const TodosContext = React.createContext<TodosContextObj>({
     items: [],
     addToDo: (todoText: string) => {},
     removeToDo: (id: string) => {}

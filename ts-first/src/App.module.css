@@ -10,6 +10,13 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   background-color: #f7f5ef;
+  transition: 0.3s ease-in-out;
+}
+
+.item:hover{
+  background-color: crimson;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  color: white;
 }
 
 .form {
