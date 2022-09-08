@@ -3,17 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import { getPosts } from "../redux/thunks/postThunk";
 import { useAppDispatch } from "../redux/store";
+import { useAppSelector } from "../hooks/hooks";
 
 const Posts = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getPosts({}));
+    dispatch(getPosts());
   }, [dispatch]);
 
-  const { posts, err, loading } = useSelector(
-    (state: RootState) => state.posts
-  );
+  const { posts, err, loading } = useAppSelector(state => state.posts);
 
 
   return (

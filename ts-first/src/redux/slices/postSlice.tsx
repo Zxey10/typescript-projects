@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getPosts } from '../thunks/postThunk'
 
-interface Post {
+export interface Post {
     userId: number,
     id: number,
     title: string,
@@ -29,14 +29,16 @@ const postSlice = createSlice({
     extraReducers: (builder) => {
        builder
             .addCase(getPosts.fulfilled, (state,action) => {
+                const data = action?.payload?.data as Post[]
+                console.log(data)
                 state.loading = false
-                state.posts = action.payload?.data
+                state.posts = data
             })
             .addCase(getPosts.pending, (state,action) => {
                 state.loading = true
             }) 
             .addCase(getPosts.rejected, (state,action) => {
-                console.log(action?.payload)
+                console.log(action?.error?.message)
             }) 
     },
     
